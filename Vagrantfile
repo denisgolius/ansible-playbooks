@@ -20,13 +20,15 @@ Vagrant.configure("2") do |config|
     config.vm.define "load-balancer-1" do |n|
       n.vm.hostname = "load-balancer-1"
       n.vm.network "private_network", ip: "192.168.77.2", libvirt__dhcp_enabled: false
-      n.vm.box = "debian/buster64"
+      n.vm.box = "generic/freebsd13"
+      n.vm.box_version = "202206.03.0"
     end
 
     config.vm.define "victoria-#{machine_id}" do |n|
       n.vm.hostname = "victoria-#{machine_id}"
       n.vm.network "private_network", ip: "192.168.77.#{20+machine_id}", libvirt__dhcp_enabled: false
-      n.vm.box = "debian/buster64"
+      n.vm.box = "generic/freebsd13"
+      n.vm.box_version = "202206.03.0"
 
       if machine_id == N
         n.vm.provision :ansible do |ansible|
